@@ -22,13 +22,14 @@ Windows sandbox で実行する
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-iwr -useb get.scoop.sh | iex
 
+cd ~\Documents\
 iwr -useb https://github.com/tak458/dotfiles-win/archive/master.zip -outfile dotfiles-win.zip
 expand-archive .\dotfiles-win.zip
 cd .\dotfiles-win\
 cd .\dotfiles-win-master\
 mv .\* ..\
+cd ..\
 rm .\dotfiles-win-master\
-dotfiles.ps1
+.\dotfiles.ps1
 ```
