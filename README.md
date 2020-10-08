@@ -2,7 +2,7 @@
 
 Windows 用 dotfiles
 
-### Windows (PowerShell)
+## Windows (PowerShell)
 
 ```powershell
 Set-Location ~
@@ -10,7 +10,7 @@ git clone https://github.com/tak458/dotfiles-win.git
 Set-Location dotfiles-win
 
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-iwr -useb get.scoop.sh | iex
+.\dotfiles.ps1
 ```
 
 ## 開発
