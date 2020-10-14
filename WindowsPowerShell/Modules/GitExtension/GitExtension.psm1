@@ -1,10 +1,18 @@
 function Remove-GitBranchMerged {
-    Push-Location $Args[0]
 
+    $dir = $args[0]
+    if ($args.count -eq 0) {
+        $dir = (Get-Location)
+    }
+
+    Write-Host ("target directory:" + $dir)
+
+    Push-Location $dir
+
+    git fetch --prune origin
     git branch --merged `
         | Select-String -NotMatch -Pattern "(\*|develop|master)" `
         | ForEach-Object{ git branch -d $_.ToString().Trim() }
-    git fetch --prune origin
 
     Pop-Location
 }
