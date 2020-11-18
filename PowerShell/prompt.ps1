@@ -26,7 +26,3 @@ function Prompt {
 if (Test-Path $pwsh_log) {
     Import-Csv $pwsh_log | Add-History
 }
-
-# Log for Evidence
-$logFileName = "C:\pwsh_log\" + (Split-Path (Get-Location) -Leaf) + "_" + (Get-date -Format "yyyyMMdd_HHmmss") + ".log"
-Start-Transcript $logFileName -append

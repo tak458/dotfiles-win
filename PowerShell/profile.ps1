@@ -10,3 +10,19 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
+
+# .env のロード
+Get-ChildItem (Get-Location) -File ".env" |
+    ForEach-Object { 
+        Write-Host "Loading $_"
+        Get-Content $_
+    } |
+    ForEach-Object {
+        $key, $value = $_.split('=', 2);
+        Invoke-Expression "`$env:$key='$value'"
+        Write-Host "Loaded `$env:$key='$value'"
+    }
+
+# Log for Evidence
+$logFileName = "C:\pwsh_log\" + (Split-Path (Get-Location) -Leaf) + "_" + (Get-date -Format "yyyyMMdd_HHmmss") + ".log"
+Start-Transcript $logFileName -append
