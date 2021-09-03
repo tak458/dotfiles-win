@@ -5,6 +5,9 @@ function Import-DotEnv {
         Write-Host "Loading $_"
         Get-Content $_
     } |
+    Where-Object {
+        -not (($_ -match "^#") -or ($_ -match "^\s*$"))
+    } |
     ForEach-Object {
         $key, $value = $_.split('=', 2);
         Invoke-Expression "`$env:$key='$value'"
@@ -18,6 +21,9 @@ function Remove-DotEnv {
     ForEach-Object { 
         Write-Host "Loading $_"
         Get-Content $_
+    } |
+    Where-Object {
+        -not (($_ -match "^#") -or ($_ -match "^\s*$"))
     } |
     ForEach-Object {
         $key, $value = $_.split('=', 2);
